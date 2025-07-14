@@ -137,9 +137,7 @@ export const useAppStore = create<AppState>()(
       name: 'gemini-clone-storage',
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
-        if (state) {
-            state.setHasHydrated(true);
-        }
+        state?.setHasHydrated(true);
       },
       partialize: (state) => ({
         theme: state.theme,
