@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -138,14 +139,19 @@ export default function LoginPage() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {countries.map((country) => (
-                              <SelectItem key={country.cca2} value={`${country.idd.root}${country.idd.suffixes?.[0] || ''}`}>
-                                <div className="flex items-center gap-2">
-                                    <Image src={country.flags.svg} alt={country.name.common} width={20} height={15} />
-                                    <span>{`${country.idd.root}${country.idd.suffixes?.[0] || ''}`}</span>
-                                </div>
-                              </SelectItem>
-                            ))}
+                            {countries
+                              .filter(country => `${country.idd.root}${country.idd.suffixes?.[0] || ''}` !== '')
+                              .map((country) => {
+                                const countryCodeValue = `${country.idd.root}${country.idd.suffixes?.[0] || ''}`;
+                                return (
+                                  <SelectItem key={country.cca2} value={countryCodeValue}>
+                                    <div className="flex items-center gap-2">
+                                        <Image src={country.flags.svg} alt={country.name.common} width={20} height={15} />
+                                        <span>{countryCodeValue}</span>
+                                    </div>
+                                  </SelectItem>
+                                )
+                            })}
                           </SelectContent>
                         </Select>
                         <FormMessage />
