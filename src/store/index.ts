@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { Chat, Message } from '@/lib/types';
-import { format }s 'date-fns';
 
 type Theme = 'light' | 'dark';
 
@@ -138,9 +137,7 @@ export const useAppStore = create<AppState>()(
       name: 'gemini-clone-storage',
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
-        if (state) {
-            state.setHasHydrated(true);
-        }
+        state?.setHasHydrated(true);
       },
        partialize: (state) => ({
         theme: state.theme,
@@ -150,6 +147,3 @@ export const useAppStore = create<AppState>()(
     }
   )
 );
-
-// Initial call to set hydration status on load
-useAppStore.getState().setHasHydrated(useAppStore.persist.hasHydrated());
