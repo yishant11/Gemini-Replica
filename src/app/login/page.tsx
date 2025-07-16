@@ -147,7 +147,7 @@ export default function LoginPage() {
                               .map((country) => {
                                 const countryCodeValue = `${country.idd.root}${country.idd.suffixes?.[0] || ''}`;
                                 return (
-                                  <SelectItem key={`${country.cca2}-${countryCodeValue}`} value={countryCodeValue}>
+                                  <SelectItem key={`${country.cca2}-${country.name.common}`} value={countryCodeValue}>
                                     <div className="flex items-center gap-2">
                                         <Image src={country.flags.svg} alt={country.name.common} width={20} height={15} />
                                         <span>{countryCodeValue}</span>
