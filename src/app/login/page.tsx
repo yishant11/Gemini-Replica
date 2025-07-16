@@ -140,11 +140,14 @@ export default function LoginPage() {
                           </FormControl>
                           <SelectContent>
                             {countries
-                              .filter(country => `${country.idd.root}${country.idd.suffixes?.[0] || ''}` !== '')
+                              .filter(country => {
+                                  const countryCodeValue = `${country.idd.root}${country.idd.suffixes?.[0] || ''}`;
+                                  return countryCodeValue !== '';
+                              })
                               .map((country) => {
                                 const countryCodeValue = `${country.idd.root}${country.idd.suffixes?.[0] || ''}`;
                                 return (
-                                  <SelectItem key={country.cca2} value={countryCodeValue}>
+                                  <SelectItem key={`${country.cca2}-${countryCodeValue}`} value={countryCodeValue}>
                                     <div className="flex items-center gap-2">
                                         <Image src={country.flags.svg} alt={country.name.common} width={20} height={15} />
                                         <span>{countryCodeValue}</span>
